@@ -10,4 +10,8 @@ router.patch('/update/:id', auth.verifyToken, user.update);
 router.patch('/update/password/:id', auth.verifyToken, user.change_password);
 router.delete('/remove/:id', auth.verifyToken, user.remove);
 
+//heart desease
+router.post('/heartdisease/:id', user.heartDisease);
+router.get('/heartdisease/:id', user.getHeartDisease);
+
 module.exports = router;
