@@ -14,4 +14,8 @@ router.delete('/remove/:id', auth.verifyToken, user.remove);
 router.post('/heartdisease/:id', user.heartDisease);
 router.get('/heartdisease/:id', user.getHeartDisease);
 
+//diabetes
+router.post('/diabetes/:id', user.diabetes);
+router.get('/diabetes/:id', user.getDiabetes);
+
 module.exports = router;
