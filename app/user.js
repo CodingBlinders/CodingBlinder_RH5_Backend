@@ -186,5 +186,147 @@ module.exports = {
                 message: error.message
             });
         }
+    },
+    //post method for user.heartDisease
+    heartDisease: async (req, res) => {
+        try {
+            let body = req.body;
+            let params = req.params;
+
+            /* validate request data */
+            // const validation = validate(schemaValidation.heartDisease, body);
+            // if (validation?.error) return res.status(400).json(validation.error);
+
+            console.log(req.params);
+            const user = await User.findOne({ _id: utils.mongoID(params.id) }, { password: false });
+
+            if (!user) {
+                return res.status(404).json({
+                    status: 'failed',
+                    message: 'user not found'
+                });
+            }
+
+            for (const key in body) {
+                user.heartDisease[key] = body[key];
+            }
+
+            await user.save();
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'user heartDisease updated'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                status: 'failed',
+                message: error.message
+            });
+        }
+    },
+
+    //get request for user.heartDisease
+    getHeartDisease: async (req, res) => {
+        try {
+            let body = req.body;
+            let params = req.params;
+
+            /* validate request data */
+            const validation = validate(schemaValidation.getHeartDisease, params);
+            if (validation?.error) return res.status(400).json(validation.error);
+
+            const user = await User.findOne({ _id: utils.mongoID(params.id) }, { password: false });
+
+            if (!user) {
+                return res.status(404).json({
+                    status: 'failed',
+                    message: 'user not found'
+                });
+            }
+
+            return res.status(200).json({
+                status: 'success',
+                data: user.heartDisease
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                status: 'failed',
+                message: error.message
+            });
+        }
+    },
+
+    //post method for user.diabetes
+    diabetes: async (req, res) => {
+        try {
+            let body = req.body;
+            let params = req.params;
+
+            /* validate request data */
+            // const validation = validate(schemaValidation.diabetes, body);
+            // if (validation?.error) return res.status(400).json(validation.error);
+
+            console.log(req.params);
+            const user = await User.findOne({ _id: utils.mongoID(params.id) }, { password: false });
+
+            if (!user) {
+                return res.status(404).json({
+                    status: 'failed',
+                    message: 'user not found'
+                });
+            }
+
+            for (const key in body) {
+                user.diabetes[key] = body[key];
+            }
+
+            await user.save();
+
+            return res.status(200).json({
+                status: 'success',
+                message: 'user diabetes updated'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                status: 'failed',
+                message: error.message
+            });
+        }
+    },
+
+    //get request for user.diabetes
+    getDiabetes: async (req, res) => {
+        try {
+            let body = req.body;
+            let params = req.params;
+
+            /* validate request data */
+            const validation = validate(schemaValidation.getDiabetes, params);
+            if (validation?.error) return res.status(400).json(validation.error);
+
+            const user = await User.findOne({ _id: utils.mongoID(params.id) }, { password: false });
+
+            if (!user) {
+                return res.status(404).json({
+                    status: 'failed',
+                    message: 'user not found'
+                });
+            }
+
+            return res.status(200).json({
+                status: 'success',
+                data: user.diabetes
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                status: 'failed',
+                message: error.message
+            });
+        }
     }
+
 };
